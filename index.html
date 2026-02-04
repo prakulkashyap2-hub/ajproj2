@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+
+            /* 🔽 ADD YOUR BACKGROUND PHOTO HERE */
+            background: url(anjali.jpg.jpeg) no-repeat center center/cover;
+
+            overflow: hidden;
+        }
+
+        /* DARK OVERLAY so card pops */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: -1;
+        }
+
+        .card {
+    position: relative;
+    padding: 40px 60px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    animation: pop 1s ease;
+    z-index: 1;
+
+    /* 🔽 INSIDE WHITE BOX BACKGROUND PHOTO */
+    background: url(ajj.jgp.jpeg) no-repeat center center/cover;
+    overflow: hidden;
+
+}
+
+
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            color: #ff4e50;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            position: relative;
+            height: 80px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yes {
+            background: #ff4e50;
+            color: white;
+            margin-right: 20px;
+        }
+
+        #yes:hover {
+            background: #e63b3e;
+            transform: scale(1.1);
+        }
+
+        #no {
+            background: hwb(299 2% 0% / 0.759);
+            position: absolute;
+        }
+
+        .hearts {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: float 4s infinite ease-in;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-800px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="hearts"></div>
+
+<div class="card">
+    <h1>
+        <u>Hey Anjali 💖</u><br>
+        <u>Will you be my Valentine?</u>
+    </h1>
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">Yessss ❤️</button>
+        <button id="no" onmouseover="moveNo()">No 💔</button>
+    </div>
+</div>
+
+<script>
+    function yesClicked() {
+        document.body.innerHTML = `
+            <div style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                background:linear-gradient(135deg,#ff758c,#ff7eb3);
+                font-family:'Segoe UI',sans-serif;
+                color:white;
+                text-align:center;
+                flex-direction:column;
+            ">
+                <h1>Yayyyy! 😍💖</h1>
+                <h2>You made me the happiest person! 💑</h2>
+                <h3>I lovveeeeee youuuuuuu !!!!!! 💖💖💖💖💖</h3>
+            </div>
+        `;
+    }
+
+    function moveNo() {
+        const noBtn = document.getElementById("no");
+        noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+        noBtn.style.top = Math.random() * (window.innerHeight - 100) + "px";
+    }
+
+    const heartsContainer = document.querySelector(".hearts");
+
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "100vh";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }, 300);
+</script>
+
+</body>
+</html>
